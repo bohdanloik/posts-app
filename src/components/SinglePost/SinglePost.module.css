@@ -1,0 +1,40 @@
+.wrapper {
+    padding: 0% 3%;
+}
+
+.commentWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tip {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    background: transparent;
+    border: 10px solid transparent;
+    top: 100%;
+    left: 10px;
+    border-top-color: #ccc;
+}
+
+.dialogbox .body {
+    position: relative;
+    max-width: 300px;
+    height: auto;
+    margin: 20px 10px;
+    padding: 5px;
+    background-color: #DADADA;
+    border-radius: 3px;
+    border: 3px solid #ccc;
+}
+
+.body .message {
+    min-height: 30px;
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #797979;
+}
