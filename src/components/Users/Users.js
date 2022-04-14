@@ -34,9 +34,9 @@ const Users = () => {
                             <td>{user.username}</td>
                             <td>{user.website}</td>
                             <td>
-                            <Link to={`/user-posts/${user.id}`} className='open-posts'>
-                               <Button>Open</Button> 
-                            </Link>
+                                <Link to={`/user-posts/${user.id}`} className='open-posts'>
+                                    <Button>Open</Button> 
+                                </Link>
                             </td>
                         </tr>
                     );

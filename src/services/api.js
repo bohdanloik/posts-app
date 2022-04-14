@@ -28,22 +28,16 @@ export const getPost = (postId) => {
     };
 };
 
-export const addPost = async (postTitle, postBody, userId) => {
-    await axios.post(
-        `${url}posts`,
-        {userId: userId, title: postTitle, body: postBody}
-    );
+export const addPost = async (userId, title, body) => {
+    await axios.post(`${url}posts`, { userId, title, body });
 };
 
-export const updatePost =  async (postTitle, postBody, userId, postId) => {
-    await axios.put(
-        `${url}posts/${postId}`,
-        {userId: userId, title: postTitle, body: postBody}
-    );
+export const updatePost =  async (userId, id, title, body, ) => {
+    await axios.put(`${url}posts/${id}`, { userId, id, title, body });
 };
 
-export const deletePost = async (postId) => {
-    await axios.delete(`${url}posts/${postId}`);
+export const deletePost = async (id) => {
+    await axios.delete(`${url}posts/${id}`);
 };
 
 export const getComments = (postId) => {

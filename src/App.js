@@ -8,8 +8,8 @@ import Modal from './components/Modal/Modal';
 import SinglePost from './components/SinglePost/SinglePost';
 
 const App = () => {
-	let location = useLocation();
-	let state = location.state;
+	const location = useLocation();
+	const state = location.state;
 
   	return (
 	  <React.Fragment>

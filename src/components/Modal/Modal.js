@@ -1,47 +1,61 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Button from "../UI/Button/Button";
 import styles  from './Modal.module.css';
+import { addPost, updatePost } from '../../services/api';
 
-const Modal = (props) => {
-    let location = useLocation();
-	let state = location.state;
-    let {postTitle, postBody} = state;
+const Modal = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+	const state = location.state;
+    const { userId, post } = state;
     
     const[title, setTitle] = useState('');
     const[description, setDescription] = useState('');
-    if(postTitle && !title) {
-        setTitle(postTitle)
-        setDescription(postBody)
 
+    if(post && !title) {
+        setTitle(post.title);
+        setDescription(post.body);
     }
     
     const titleHandler = (event) => {
-        setTitle(event.target.value)
+        setTitle(event.target.value);
     }
     const descriptionHandler = (event) => {
-        setDescription(event.target.value)
+        setDescription(event.target.value);
     }
-    let navigate = useNavigate();
-
-    function onDismiss() {
+    const onDismiss = () => {
         navigate(-1);
     }
-    const onSubmitHandler = (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
+        post
+            ? await updatePost(Number(userId), post?.id, title, description)
+            : await addPost(Number(userId), title, description);
     }
     
     return (
         <div className={styles.backdrop}>
             <div className={styles.modal}>
                 <form className={styles.form} onSubmit={onSubmitHandler}>
-                    <label for='title'>Title</label>
-                    <input id='title' type='text' onChange={titleHandler} value={title}></input>
-                    <label for='description'>Description</label>
-                    <textarea id='description' className={styles.textarea} rows="7" value={description} onChange={descriptionHandler}></textarea>
+                    <label>Title</label>
+                    <input type='text' onChange={titleHandler} value={title}></input>
+                    <label>Description</label>
+                    <textarea
+                        className={styles.textarea}
+                        rows="7"
+                        value={description}
+                        onChange={descriptionHandler}
+                    ></textarea>
                     <div className={styles.buttonWraper}>
-                        <button className={styles.button} type="submit" onClick={onDismiss}>SAVE</button>
-                        <button className={styles.button} onClick={onDismiss}>CLOSE</button>
+                        <button
+                            className={styles.button}
+                            type="submit"
+                            onClick={onDismiss}
+                        >SAVE</button>
+                        <button
+                            className={styles.button}
+                            onClick={onDismiss}
+                        >CLOSE</button>
                     </div>
                 </form>
             </div>
